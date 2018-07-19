@@ -29,7 +29,7 @@ var optimage = module.exports = exports = function (options, done){
         // 4. Re-compressing final image
         // advpng -z -4 image.png
         case '.png':
-            binPath = require('optipng-bin').path;
+            binPath = require('optipng-bin');
             // OptiPNG can't overwrite without creating a backup file
             // https://sourceforge.net/tracker/?func=detail&aid=3607244&group_id=151404&atid=780913
             if (path.resolve(outputFile) !== path.resolve(inputFile) && fs.existsSync(outputFile)) {
@@ -42,7 +42,7 @@ var optimage = module.exports = exports = function (options, done){
         // jpegtran [switches] inputfile outputfile
         case '.jpg':
         case '.jpeg':
-            binPath = require('jpegtran-bin').path;
+            binPath = require('jpegtran-bin');
             args.push('-copy', 'none', '-optimize');
             if(progressive) args.push('-progressive');
             if(options.arg) args = args.concat(options.arg);
@@ -52,7 +52,7 @@ var optimage = module.exports = exports = function (options, done){
         // maybe support to do a merge with frames?
         // that means we need an array for inputOutput.
         case '.gif':
-            binPath = require('gifsicle').path;
+            binPath = require('gifsicle');
             args.push('-o', outputFile, inputFile, '-O', level||2 );
             if (options.arg) arg = args.concat(options.arg);
             break;
